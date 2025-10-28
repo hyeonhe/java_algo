@@ -1,11 +1,10 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.StringTokenizer;
 
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder ans = new StringBuilder();
         StringTokenizer st = new StringTokenizer(br.readLine(), " ");
 
         int n = Integer.parseInt(st.nextToken());
@@ -13,7 +12,6 @@ public class Main {
 
         st = new StringTokenizer(br.readLine(), " ");
         int[] dp = new int[n + 1];
-        int[] ans = new int[m];
 
         for (int i = 1; i < n + 1; i++) {
             if (i == 1) dp[i] = Integer.parseInt((st.nextToken()));
@@ -24,10 +22,9 @@ public class Main {
             st = new StringTokenizer(br.readLine(), " ");
             int a = Integer.parseInt((st.nextToken()));
             int b = Integer.parseInt((st.nextToken()));
-            ans[i] = dp[b] - dp[a-1];
+            ans.append(dp[b] - dp[a-1]).append("\n");
         }
 
-        for (int x : ans) System.out.println(x);
-
+        System.out.println(ans);
     }
 }
