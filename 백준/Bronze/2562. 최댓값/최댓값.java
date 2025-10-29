@@ -20,7 +20,5 @@ public class Main {
 
         System.out.println(maxVal);
         System.out.println(idx+1);
-
-        br.close();
     }
 }
