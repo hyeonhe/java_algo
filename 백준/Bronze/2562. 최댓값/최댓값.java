@@ -9,15 +9,17 @@ public class Main {
         int maxVal = 0;
         int idx = 0;
 
-        for (int i = 1; i <= 9; i++) {
+        for (int i = 0; i < 9; i++) {
             int num = Integer.parseInt(br.readLine());
+
             if (maxVal < num) {
                 maxVal = num;
                 idx = i;
             }
         }
 
-        System.out.println(maxVal + "\n" + idx);
+        System.out.println(maxVal);
+        System.out.println(idx+1);
 
         br.close();
     }
