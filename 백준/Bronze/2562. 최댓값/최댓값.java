@@ -6,14 +6,14 @@ public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        int maxVal = Integer.parseInt(br.readLine());
-        int idx = 1;
+        int maxVal = 0;
+        int idx = 0;
 
-        for (int i = 1; i <= 8; i++) {
+        for (int i = 1; i <= 9; i++) {
             int num = Integer.parseInt(br.readLine());
             if (maxVal < num) {
                 maxVal = num;
-                idx = i+1;
+                idx = i;
             }
         }
 
