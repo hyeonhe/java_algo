@@ -10,11 +10,10 @@ public class Main {
 
         int a = Integer.parseInt(st.nextToken());
         int b = Integer.parseInt(st.nextToken());
-
-        int gcdNum = gcd(a, b);
-        int lcmNum = a / gcdNum * b;
+        int d = gcd(a, b);
         
-        System.out.printf("%d\n%d", gcdNum, lcmNum);
+        System.out.println(d);
+        System.out.println(a / d * b);
     }
 
     static int gcd(int x, int y) {
