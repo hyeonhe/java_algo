@@ -17,8 +17,7 @@ public class Main {
 
         while (q.size() > 1) {
             q.poll();
-            int val = q.poll();
-            q.offer(val);
+            q.offer(q.poll());
         }
 
         System.out.println(q.poll());
