@@ -11,25 +11,41 @@ public class Main {
         StringBuilder sb = new StringBuilder();
 
         int n = Integer.parseInt(br.readLine());
-        String[][] arr = new String[n][2];
+        Person[] person = new Person[n];
 
         for (int i = 0; i < n; i++) {
             StringTokenizer st = new StringTokenizer(br.readLine());
-            arr[i][0] = st.nextToken();
-            arr[i][1] = st.nextToken();
+            int age = Integer.parseInt(st.nextToken());
+            String name = st.nextToken();
+            person[i] = new Person(age, name);
         }
 
-        Arrays.sort(arr, new Comparator<String[]>() {
+        Arrays.sort(person, new Comparator<Person>() {
             @Override
-            public int compare(String[] p1, String[] p2) {
-                return Integer.parseInt(p1[0]) - Integer.parseInt(p2[0]);
+            public int compare(Person p1, Person p2) {
+                return p1.age - p2.age;
             }
         });
 
         for (int i = 0; i < n; i++) {
-            sb.append(arr[i][0] + " " + arr[i][1] + "\n");
+            sb.append(person[i]).append("\n");
         }
 
         System.out.println(sb);
+    }
+
+    public static class Person {
+        int age;
+        String name;
+
+        public Person(int age, String name) {
+            this.age = age;
+            this.name = name;
+        }
+
+        @Override
+        public String toString() {
+            return age  + " " + name;
+        }
     }
 }
