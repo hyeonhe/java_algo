@@ -7,60 +7,13 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String str = br.readLine();
 
-        int i = 0;
-        int cnt = 0;
-        int len = str.length();
+        String[] alpha = {"c=", "c-", "dz=", "d-", "lj", "nj", "s=", "z="};
 
-        while (i < len) {
-            char c = str.charAt(i);
-
-            if (c == 'c') {
-                if (i < len - 1) {
-                    char nextC = str.charAt(i+1);
-                    if (nextC == '=' || nextC == '-') {
-                        i++;
-                    }
-                }
-            }
-
-            else if (c == 'd') {
-                if (i < len - 1) {
-                    char nextC = str.charAt(i+1);
-                    if (nextC == 'z') {
-                        if (i < len - 2) {
-                            char lastC = str.charAt(i+2);
-                            if (lastC == '=') {
-                                i += 2;
-                            }
-                        }
-                    }
-                    else if (nextC == '-') {
-                        i++;
-                    }
-                }
-            }
-
-            else if (c == 'l' || c == 'n') {
-                if (i < len - 1) {
-                    char nextC = str.charAt(i+1);
-                    if (nextC == 'j') {
-                        i++;
-                    }
-                }
-
-            }
-            else if (c == 's' || c == 'z') {
-                if (i < len - 1) {
-                    char nextC = str.charAt(i+1);
-                    if (nextC == '=') {
-                        i++;
-                    }
-                }
-            }
-            cnt++;
-            i++;
+        for (String s: alpha) {
+            str = str.replace(s, ".");
         }
 
-        System.out.println(cnt);
+        System.out.println(str.length());
     }
+
 }
