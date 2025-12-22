@@ -1,11 +1,10 @@
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 
 public class Main {
     public static void main(String[] args) throws IOException {
+        StringBuilder sb = new StringBuilder();
         boolean[] isNotSelfNum = new boolean[10001];
-        
+
         for (int i = 1; i <= 10000; i++) {
             int sum = 0;
             sum += i;
@@ -18,7 +17,9 @@ public class Main {
         }
 
         for (int i = 1; i <= 10000; i++) {
-            if (!isNotSelfNum[i]) System.out.println(i);
+            if (!isNotSelfNum[i]) sb.append(i).append('\n');
         }
+
+        System.out.println(sb);
     }
 }
