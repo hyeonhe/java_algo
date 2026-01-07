@@ -1,12 +1,12 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.LinkedList;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class Main {
     static StringBuilder sb = new StringBuilder();
-
+    static boolean[] visited;
+    static ArrayList<Integer>[] arr;
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
@@ -15,36 +15,43 @@ public class Main {
         int m = Integer.parseInt(st.nextToken());
         int v = Integer.parseInt(st.nextToken());
 
-        int[][] arr = new int[n+1][n+1];
-        boolean[] visited = new boolean[n+1];
+        arr = new ArrayList[n + 1];
+        for (int i = 0; i <= n; i++) {
+            arr[i] = new ArrayList<>();
+        }
 
         for (int i = 0; i < m; i++) {
             st = new StringTokenizer(br.readLine());
             int a = Integer.parseInt(st.nextToken());
             int b = Integer.parseInt(st.nextToken());
-            arr[a][b] = 1;
-            arr[b][a] = 1;
+            arr[a].add(b);
+            arr[b].add(a);
         }
 
-        dfs(arr, visited, n, v);
+        for (int i = 1; i <= n; i++) {
+            Collections.sort(arr[i]);
+        }
+
+        visited = new boolean[n+1];
+        dfs(v);
         sb.append('\n');
         visited = new boolean[n+1];
-        bfs(arr, visited, n, v);
+        bfs(n, v);
         System.out.println(sb);
     }
 
-    static void dfs(int[][] arr, boolean[] visited, int n, int v) {
+    static void dfs(int v) {
         visited[v] = true;
         sb.append(v).append(' ');
 
-        for (int i = 1; i <= n; i++) {
-            if (arr[v][i] == 1 && !visited[i]) {
-                dfs(arr, visited, n, i);
+        for (int next: arr[v]) {
+            if (!visited[next]) {
+                dfs(next);
             }
         }
     }
 
-    static void bfs(int[][] arr, boolean[] visited, int n, int v) {
+    static void bfs(int n, int v) {
         LinkedList<Integer> queue = new LinkedList<>();
         queue.add(v);
         visited[v] = true;
@@ -53,10 +60,10 @@ public class Main {
             int num = queue.poll();
             sb.append(num).append(' ');
 
-            for (int i = 1; i <= n; i++) {
-                if (arr[num][i] == 1 && !visited[i]) {
-                    queue.add(i);
-                    visited[i] = true;
+            for (int next: arr[num]) {
+                if (!visited[next]) {
+                    queue.add(next);
+                    visited[next] = true;
                 }
             }
         }
