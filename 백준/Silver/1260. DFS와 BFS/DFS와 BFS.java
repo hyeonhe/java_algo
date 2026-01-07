@@ -1,7 +1,11 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Queue;
+import java.util.StringTokenizer;
+import java.util.ArrayDeque;
 
 public class Main {
     static StringBuilder sb = new StringBuilder();
@@ -36,7 +40,7 @@ public class Main {
         dfs(v);
         sb.append('\n');
         visited = new boolean[n+1];
-        bfs(n, v);
+        bfs(v);
         System.out.println(sb);
     }
 
@@ -51,8 +55,8 @@ public class Main {
         }
     }
 
-    static void bfs(int n, int v) {
-        LinkedList<Integer> queue = new LinkedList<>();
+    static void bfs(int v) {
+        Queue<Integer> queue = new ArrayDeque<>();
         queue.add(v);
         visited[v] = true;
 
