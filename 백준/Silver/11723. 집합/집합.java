@@ -1,14 +1,13 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.HashSet;
 import java.util.StringTokenizer;
 
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringBuilder sb = new StringBuilder();
-        HashSet<Integer> numSet = new HashSet<>();
+        boolean[] set = new boolean[21];
 
         int m = Integer.parseInt(br.readLine());
 
@@ -16,32 +15,31 @@ public class Main {
             StringTokenizer st = new StringTokenizer(br.readLine());
             String command = st.nextToken();
 
-            if (command.equals("add")) {
-                numSet.add(Integer.parseInt(st.nextToken()));
-            }
-            else if (command.equals("check")) {
-                int n = Integer.parseInt(st.nextToken());
-                sb.append(numSet.contains(n) ? 1 : 0).append('\n');
-            }
-            else if (command.equals("remove")) {
-                int n = Integer.parseInt(st.nextToken());
-                numSet.remove(n);
-            }
-            else if (command.equals("toggle")) {
-                int n = Integer.parseInt(st.nextToken());
-                if(numSet.contains(n)) numSet.remove(n);
-                else numSet.add(n);
-            }
-            else if (command.equals("all")) {
-                for (int k = 1; k <= 20; k++) {
-                    numSet.add(k);
-                }
-            }
-            else if (command.equals("empty")) {
-                numSet = new HashSet<>();
+            switch (command) {
+                case "add":
+                    set[Integer.parseInt(st.nextToken())] = true;
+                    break;
+                case "check":
+                    int n = Integer.parseInt(st.nextToken());
+                    sb.append(set[n] ? 1 : 0).append('\n');
+                    break;
+                case "remove":
+                    set[Integer.parseInt(st.nextToken())] = false;
+                    break;
+                case "toggle":
+                    int toggleNum = Integer.parseInt(st.nextToken());
+                    set[toggleNum] = !set[toggleNum];
+                    break;
+                case "all":
+                    for (int k = 1; k <= 20; k++) {
+                        set[k] = true;
+                    }
+                    break;
+                case "empty":
+                    set = new boolean[21];
             }
         }
 
-        System.out.println(sb);
+        System.out.print(sb);
     }
 }
