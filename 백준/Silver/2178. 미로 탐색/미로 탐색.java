@@ -26,7 +26,7 @@ public class Main {
             String line = br.readLine();
 
             for (int j = 0; j < m; j++) {
-                grid[i][j] = Integer.parseInt(String.valueOf(line.charAt(j)));
+                grid[i][j] = line.charAt(j) - '0';
             }
         }
 
@@ -46,7 +46,7 @@ public class Main {
                 int nx = p.x + dx[i];
                 int ny = p.y + dy[i];
 
-                if (nx >= 0 && nx < n && ny >= 0 && ny < m && !visited[nx][ny] && grid[nx][ny] != 0) {
+                if (nx >= 0 && nx < n && ny >= 0 && ny < m && grid[nx][ny] == 1 && !visited[nx][ny]) {
                     queue.add(new Point(nx, ny));
                     visited[nx][ny] = true;
                     grid[nx][ny] = grid[p.x][p.y] + 1;
