@@ -15,22 +15,19 @@ public class Main {
         m = Integer.parseInt(st.nextToken());
 
         st = new StringTokenizer(br.readLine());
-
         tree = new int[n];
+
+        int min = 0;
         int max = 0;
+        int ans = 0;
 
         for (int i = 0; i < n; i++) {
             tree[i] = Integer.parseInt(st.nextToken());
             if (tree[i] > max) max = tree[i];
         }
 
-        binarySearch(0, max);
-        System.out.println(ans);
-    }
-
-    static void binarySearch(int start, int end) {
-        while (start <= end) {
-            int mid = (start + end) / 2;
+        while (min <= max) {
+            int mid = (min + max) / 2;
             long cnt = 0;
 
             for (int i = 0; i < n; i++) {
@@ -39,10 +36,12 @@ public class Main {
 
             if (cnt >= m) {
                 ans = mid;
-                start = mid + 1;
+                min = mid + 1;
             } else {
-                end = mid - 1;
+                max = mid - 1;
             }
         }
+
+        System.out.println(ans);
     }
 }
