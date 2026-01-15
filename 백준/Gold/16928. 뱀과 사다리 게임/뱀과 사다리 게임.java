@@ -8,6 +8,7 @@ import java.util.StringTokenizer;
 public class Main {
     static int[] arr = new int[101];
     static int[] board = new int[101];
+    static boolean[] visited = new boolean[101];
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
@@ -29,11 +30,12 @@ public class Main {
     static void bfs() {
         Queue<Integer> queue = new ArrayDeque<>();
         queue.offer(1);
+        visited[1] = true;
 
         while(!queue.isEmpty()) {
             int x = queue.poll();
 
-            if (x == 100) break;
+            if (x == 100) return;
             for (int i = 1; i < 7; i++) {
                 int n = x + i;
 
@@ -41,9 +43,10 @@ public class Main {
                 if (board[n] != 0) {
                     n = board[n];
                 }
-                if (arr[n] == 0) {
+                if (!visited[n]) {
                     arr[n] = arr[x] + 1;
                     queue.offer(n);
+                    visited[n] = true;
                 }
             }
         }
