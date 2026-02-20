@@ -1,75 +1,55 @@
 class Solution {
     public int[] solution(String[] park, String[] routes) {
-        int[] position = new int[2];
+        int x = 0, y = 0;
+        int n = park.length;
+        int m = park[0].length();
         
         for (int i = 0; i < park.length; i++) {
             for (int j = 0; j < park[i].length(); j++) {
                 if (park[i].charAt(j) == 'S') {
-                    position[0] = i;
-                    position[1] = j;
+                    x = i;
+                    y = j;
                 }
             }
         }
         
-        for (int i = 0; i < routes.length; i++) {
-            char route = routes[i].charAt(0);
-            int cnt = Integer.parseInt("" + routes[i].charAt(2));            
-            boolean isBlocked = false;
+        int[] dx = {0, 0, 1, -1};
+        int[] dy = {1, -1, 0, 0};
+        char[] direction = {'E', 'W', 'S', 'N'};
+        
+        for (String route: routes) {
+        
+            char r = route.charAt(0);
+            int cnt = route.charAt(2) - '0';            
             
-            if (route == 'E') {
-                for (int k = 1; k <= cnt; k++) {
-                    if (position[1] + k >= park[0].length()) {
+            boolean isBlocked = false;
+            int nx = x, ny = y;
+            
+            for (int i = 0; i < 4; i++) {
+                
+                if (direction[i] == r) {
+                    for (int step = 1; step <= cnt; step++) {
+                        int tx = x + dx[i] * step;
+                        int ty = y + dy[i] * step;
+                        
+                        if (tx < 0 || tx >= n || ty < 0 || ty >= m || park[tx].charAt(ty) == 'X') {
                         isBlocked = true;
                         break;
                     }
-                    if (park[position[0]].charAt(position[1] + k) == 'X') {
-                        isBlocked = true;
-                        break;
+                        nx = tx;
+                        ny = ty;
                     }
+                    
                 }
-                if (!isBlocked) position[1] += cnt;
             }
-            else if (route == 'W') { 
-                for (int k = 1; k <= cnt; k++) {
-                    if (position[1] - k < 0) {
-                        isBlocked = true;
-                        break;
-                    }
-                    if (park[position[0]].charAt(position[1] - k) == 'X') {
-                        isBlocked = true;
-                        break;
-                    }
-                }
-                if (!isBlocked) position[1] -= cnt;
+            
+            if (!isBlocked) {
+                x = nx;
+                y = ny;
             }
-            else if (route == 'S') {
-                for (int k = 1; k <= cnt; k++) {
-                    if (position[0] + k >= park.length) {
-                        isBlocked = true;
-                        break;
-                    }
-                    if (park[position[0] + k].charAt(position[1]) == 'X') {
-                        isBlocked = true;
-                        break;
-                    }
-                }
-                if (!isBlocked) position[0] += cnt;
-            }
-            else if (route == 'N') {
-                for (int k = 1; k <= cnt; k++) {
-                    if (position[0] - k < 0) {
-                        isBlocked = true;
-                        break;
-                    }
-                    if (park[position[0] - k].charAt(position[1]) == 'X') {
-                        isBlocked = true;
-                        break;
-                    }
-                }
-                if (!isBlocked) position[0] -= cnt;
-            }
+    
         }
         
-        return position;
+        return new int[]{x, y};
     }
 }
